@@ -19,6 +19,7 @@ export default class AuthenticationController {
   }
 
   async me({ auth }: HttpContext) {
-    return auth.getUserOrFail()
+    await auth.user?.load('roles', (query) => query.preload('permissions'))
+    return auth.user
   }
 }

@@ -11,6 +11,9 @@ export default class Permission extends BaseModel {
   @column()
   declare description: string
 
+  @column()
+  declare uid: string
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
