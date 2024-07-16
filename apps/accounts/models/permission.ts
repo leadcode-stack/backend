@@ -14,6 +14,9 @@ export default class Permission extends BaseModel {
   @column()
   declare uid: string
 
+  @column()
+  declare isStaffOnly: boolean
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
