@@ -1,7 +1,9 @@
 import ProjectService from '#apps/projects/services/project_service'
 import { HttpContext } from '@adonisjs/core/http'
 import { roleStoreValidator, roleUpdateValidator } from '#apps/accounts/validators/roles_validator'
+import { inject } from '@adonisjs/core'
 
+@inject()
 export default class ProjectsController {
   constructor(private projectService: ProjectService) {}
 
@@ -15,6 +17,10 @@ export default class ProjectsController {
 
   async show({ params }: HttpContext) {
     return this.projectService.findByIdOrFail(params.id)
+  }
+
+  async findForUser({ auth }: HttpContext) {
+    return this.projectService.findForUser(auth.user!.id)
   }
 
   async store({ request }: HttpContext) {

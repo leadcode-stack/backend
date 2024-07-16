@@ -11,7 +11,14 @@ export default class ProjectService {
       .if(schema.search, (query) => {
         query.where('name', 'ilike', `%${schema.search}%`)
       })
+      .preload('user')
       .paginate(schema.page as number, schema.limit as number)
+  }
+
+  async findForUser(userId: number) {
+    return Project.query()
+      .where('user_id', userId)
+      .preload('user')
   }
 
   async findByIdOrFail(id: number) {

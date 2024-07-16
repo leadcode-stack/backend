@@ -7,13 +7,14 @@ router
   .group(() => {
     router
       .group(() => {
-        router.get('', [ProjectsController, 'index'])
-        router.get(':id', [ProjectsController, 'show'])
-        router.post('', [ProjectsController, 'store'])
-        router.put(':id', [ProjectsController, 'update'])
-        router.delete(':id', [ProjectsController, 'destroy'])
+        router.get('/', [ProjectsController, 'index'])
+        router.get('/:id', [ProjectsController, 'show'])
+        router.get('/find-for-user', [ProjectsController, 'findForUser'])
+        router.post('/', [ProjectsController, 'store'])
+        router.put('/:id', [ProjectsController, 'update'])
+        router.delete('/:id', [ProjectsController, 'destroy'])
       })
-      .prefix('roles')
+      .prefix('projects')
   })
   .prefix('v1')
   .middleware(middleware.auth())
