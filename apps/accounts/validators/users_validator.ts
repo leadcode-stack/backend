@@ -34,6 +34,7 @@ export const userUpdateValidator = vine.compile(
       })
       .optional(),
     password: vine.string().minLength(8).maxLength(255).confirmed().optional(),
+    roles: vine.array(vine.number()).optional(),
   })
 )
 

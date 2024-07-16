@@ -24,6 +24,12 @@ export default class UserService {
   }
 
   async update(user: User, schema: UserUpdateSchema) {
-    return user.merge(schema).save()
+    await user.merge(schema).save()
+
+    if (schema.roles) {
+      await user.related('roles').sync(schema.roles)
+    }
+
+    return user
   }
 }
