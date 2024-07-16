@@ -10,8 +10,9 @@ export default class RolesController {
   async index({ request }: HttpContext) {
     const page = request.input('page', 1)
     const limit = request.input('limit', 10)
+    const search = request.input('search')
 
-    return this.roleService.paginate({ page, limit })
+    return this.roleService.paginate({ page, limit, search })
   }
 
   async show({ params }: HttpContext) {
@@ -24,7 +25,6 @@ export default class RolesController {
   }
 
   async update({ request, params }: HttpContext) {
-    console.log(request.all())
     const data = await request.validateUsing(roleUpdateValidator)
     const user = await this.roleService.findByIdOrFail(params.id)
     return this.roleService.update(user, data)

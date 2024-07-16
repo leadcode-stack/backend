@@ -20,7 +20,13 @@ export default class RoleService {
     return Role.create(schema)
   }
 
-  async update(user: Role, schema: RoleUpdateSchema) {
-    return user.merge(schema).save()
+  async update(role: Role, schema: RoleUpdateSchema) {
+    await role.merge(schema).save()
+
+    if (schema.permissions) {
+      await role.related('permissions').sync(schema.permissions)
+    }
+
+    return role
   }
 }
